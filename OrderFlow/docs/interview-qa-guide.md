@@ -87,7 +87,7 @@ defined in `DAL`, not concretions — and BLL never references EF Core types dir
 **Q: What about LSP and ISP — no exhibits for those?**
 Correct, and say so directly rather than stretching an answer. ISP is implicitly satisfied
 throughout — interfaces are narrow and role-specific (`ICustomerRepository`,
-`IInventoryService.HasSufficientStock`) rather than one fat repository interface — but there's
+`IInventoryService.HasSufficientStockAsync`) rather than one fat repository interface — but there's
 no dedicated violation-then-fix pair for it. LSP has no exhibit at all since there's no
 inheritance hierarchy in this codebase deep enough to violate it meaningfully. Naming this gap
 unprompted is a better signal of real understanding than forcing an example that isn't there.
@@ -253,7 +253,7 @@ Two, from Story 2.5's code review (Order Creation & Confirmation UI):
 
 Both got regression tests. **The meta-lesson** (from this project's own Epic 2 retrospective):
 these were the two most serious bugs found across the whole epic, and they shipped in the story
-with the *fewest* code-review patches (2, vs. 5-7 in other stories) — patch *count* is a weak
+with the *fewest* code-review patches (2, vs. 3-7 across the epic's other four stories) — patch *count* is a weak
 severity proxy. Don't let a quiet review lull you; ask what was actually tested, not how many
 comments came back.
 
@@ -317,9 +317,9 @@ aspirational — check the green badge in the repo's README.
 
 **Q: How did test coverage discipline change across the project?**
 Tracked and improving: `OrderFlow.Tests` went 1 → 28 across Epic 1, 28 → 58 across Epic 2. Review
-patch counts per story in Epic 1 fell 12 → 10 → 8 → 4 → 1 — by the epic's last story, "every one
-of the previous story's code-review fixes was baked in from the start rather than left for review
-to catch" (Story 1.5's own Change Log). That's a concrete, numbers-backed answer to "how do you
+patch counts per story in Epic 1 fell 12 → 10 → 8 → 4 → 1 — by the epic's last story, Story 1.5's
+own Change Log records that "every Story 1.3 code-review fix... was baked in from the start
+rather than left for review to catch." That's a concrete, numbers-backed answer to "how do you
 drive quality up over a project's lifetime," not a platitude.
 
 ---
