@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Isolated per AD-8: the only permitted reference is OrderFlow.Domain, so every exhibit
+       uses real Domain types instead of a locally redefined toy type. OrderFlow.Presentation/
+       BLL/DAL are never referenced here, and never reference this project either. -->
+  <ItemGroup>
+    <ProjectReference Include="..\OrderFlow.Domain\OrderFlow.Domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+</Project>
