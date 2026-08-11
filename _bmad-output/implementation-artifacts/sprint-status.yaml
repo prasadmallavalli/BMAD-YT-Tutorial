@@ -91,16 +91,24 @@ action_items:
     status: done
     resolution: "2026-08-11: git init + GitHub Actions workflow (.github/workflows/tests.yml, windows-latest) added; repo pushed to github.com/prasadmallavalli/BMAD-YT-Tutorial. Also closed a real coverage gap first: added SaveAsync_OnUpdateFailure_ShowsErrorAndReturnsFalse to CustomerDetailPresenterTests and ProductDetailPresenterTests (previously only the Create-failure branch was covered). CI run on windows-latest passed — OrderFlow.Presentation.Tests executed and passed for the first time. See _bmad-output/implementation-artifacts/tests/test-summary.md."
 
+  - epic: 1
+    action: "Story 1.1's AC2 (MainForm launches without throwing) was never independently verified — dev machine is macOS, and CI (once added) only ran dotnet test, not the app itself"
+    owner: "user / next session"
+    status: done
+    resolution: "2026-08-11: added a smoke-test step to .github/workflows/tests.yml that launches the built OrderFlow.Presentation.exe on windows-latest and checks its window title within 20s ('OrderFlow Desktop' = pass; the ReportFatal dialog title, an early exit, or a timeout = fail). CI run #4 (commit 574708c) passed this step, exercising the real composition root (ConfigureServices, BuildServiceProvider with ValidateOnBuild/ValidateScopes, MainForm's constructor). See deferred-work.md (Story 1.1 section)."
+
 # SESSION CLOSE — 2026-08-11
 # ==========================
-# All 4 epics done (18/18 stories), epic-4 retrospective done, both open action
-# items resolved and CI-verified. epic-1/epic-2 status corrected from
-# in-progress to done in this session — all their stories were already done,
-# the epic-level flag just hadn't been advanced.
+# All 4 epics done (18/18 stories), epic-4 retrospective done, all three open
+# action items resolved and CI-verified (including Story 1.1's AC2, closed as
+# a follow-up in this same session). epic-1/epic-2 status corrected from
+# in-progress to done — all their stories were already done, the epic-level
+# flag just hadn't been advanced.
 #
 # Repo: github.com/prasadmallavalli/BMAD-YT-Tutorial (main), CI: windows-latest,
-# Tests workflow passing (OrderFlow.Tests 82/82 + OrderFlow.Presentation.Tests,
-# both executed for real on windows-latest, not just compiled).
+# Tests workflow passing: Restore, Build, Test (OrderFlow.Tests 82/82 +
+# OrderFlow.Presentation.Tests, both executed for real, not just compiled),
+# and the MainForm launch smoke test (AC2) — all green as of run #4.
 #
 # No open action items remain. epic-1/epic-2/epic-3 retrospectives remain
 # "optional" and undone by choice — not a gap, per this file's own status
