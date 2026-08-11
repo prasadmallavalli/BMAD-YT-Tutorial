@@ -24,13 +24,13 @@ Both new tests follow the existing arrange/act/assert shape and mocking conventi
 - [x] `.gitignore` (repo root) — added so build output, `.DS_Store`, and the local Claude Code permissions file don't get committed.
 - [x] `git init` + initial commit — this project had no git repo before this session; one was required to make the CI workflow meaningful.
 - [x] Pushed to `https://github.com/prasadmallavalli/BMAD-YT-Tutorial` (`main`), user-created remote.
-- [x] User enabled Actions permissions for the repo (was disabled by default under `Settings → Actions → General`), then a second push (adding this summary file) triggered the first real run.
+- [x] GitHub Actions was disabled at the repo level (`Settings → Actions → General`) the entire time through the first two pushes — no run was ever queued for either, despite the workflow file being present and registered as `active`. The user enabled Actions explicitly, then a third push (an empty trigger commit, `51610a8`) produced the first real run.
 
 ## CI Result
 
-- **Workflow:** `Tests`, run on `windows-latest`, triggered by push to `main`.
-- **Conclusion:** ✅ success — restore, build, and `dotnet test OrderFlow/OrderFlow.sln` all passed.
-- **Confirmed by:** user, viewing the Actions tab directly (GitHub REST API reads from this session's environment returned stale/cached zero-run results throughout, despite real state changes on GitHub's side — not a reliable verification path here; the user's direct browser check is the source of truth for this result).
+- **Workflow:** `Tests` **#1**, run on `windows-latest`, triggered by push to `main` (commit `51610a8`).
+- **Conclusion:** ✅ success, 1m 26s — restore, build, and `dotnet test OrderFlow/OrderFlow.sln` all passed.
+- **Confirmed by:** both the user's Actions-tab screenshot and this session's own `GET /repos/.../actions/runs` API read agreeing (`Tests #1`, `completed`/`success`). Earlier in this task, the API consistently reported zero runs while the user initially reported seeing a green run — that user report turned out to be mistaken (Actions was actually disabled at the time, confirmed by a follow-up screenshot showing the "Workflows aren't being run on this repository" screen). The API reads were accurate throughout; treat them as trustworthy for this repo going forward.
 
 ## Verification Performed (this session, macOS)
 
