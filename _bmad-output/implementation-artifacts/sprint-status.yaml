@@ -41,7 +41,7 @@
 # - Retrospective appends its action items to action_items; sprint-status surfaces open ones
 
 generated: 2026-08-06
-last_updated: 2026-08-11-epic-4-review-sweep-complete
+last_updated: 2026-08-11-presentation-tests-ci-verified
 project: BMAD YT TUTORIAL
 project_key: NOKEY
 tracking_system: file-system
@@ -84,3 +84,9 @@ action_items:
     owner: "user / next session"
     status: done
     resolution: "All 6 stories reviewed 2026-08-11. 3-3/3-4 had patches applied and decision-needed items resolved; 4-1/4-2/4-3 reviewed together (shared OrderFlow.Exhibits/Program.cs), 1 patch applied; 4-4 fact-checked clean, zero findings. See each story's Review Findings section and deferred-work.md."
+
+  - epic: 4
+    action: "OrderFlow.Presentation.Tests is unrunnable on the macOS dev machine (missing Microsoft.WindowsDesktop.App) — needs a Windows/CI environment to ever be verified by actually running"
+    owner: "user / next session"
+    status: done
+    resolution: "2026-08-11: git init + GitHub Actions workflow (.github/workflows/tests.yml, windows-latest) added; repo pushed to github.com/prasadmallavalli/BMAD-YT-Tutorial. Also closed a real coverage gap first: added SaveAsync_OnUpdateFailure_ShowsErrorAndReturnsFalse to CustomerDetailPresenterTests and ProductDetailPresenterTests (previously only the Create-failure branch was covered). CI run on windows-latest passed — OrderFlow.Presentation.Tests executed and passed for the first time. See _bmad-output/implementation-artifacts/tests/test-summary.md."

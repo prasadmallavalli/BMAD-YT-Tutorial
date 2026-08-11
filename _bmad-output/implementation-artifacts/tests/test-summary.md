@@ -2,6 +2,7 @@
 
 **Date:** 2026-08-11
 **Goal:** Close the "OrderFlow.Presentation.Tests unrunnable on macOS dev machine" gap flagged in the Epic 4 retrospective.
+**Status: CLOSED.** CI is live at `github.com/prasadmallavalli/BMAD-YT-Tutorial`, and the `Tests` workflow ran green on `windows-latest` — `OrderFlow.Presentation.Tests` executed for real (not just compiled) and passed, including the two new `SaveAsync_OnUpdateFailure` tests. See "CI Result" below.
 
 ## What Was Found
 
@@ -19,9 +20,17 @@
 Both new tests follow the existing arrange/act/assert shape and mocking convention (`MockScopeHelper`, `Moq`) already used throughout the file — no new abstractions introduced.
 
 ### CI (closes the execution gap)
-- [x] `.github/workflows/tests.yml` — new GitHub Actions workflow on `windows-latest`, restoring/building/testing `OrderFlow/OrderFlow.sln` on push/PR to `main`. This is the only environment where `OrderFlow.Presentation.Tests` can actually execute (not just compile) — once pushed, it becomes the real verification path for this suite.
+- [x] `.github/workflows/tests.yml` — new GitHub Actions workflow on `windows-latest`, restoring/building/testing `OrderFlow/OrderFlow.sln` on push/PR to `main`. This is the only environment where `OrderFlow.Presentation.Tests` can actually execute (not just compile).
 - [x] `.gitignore` (repo root) — added so build output, `.DS_Store`, and the local Claude Code permissions file don't get committed.
-- [x] `git init` + initial commit — this project had no git repo before this session; one was required to make the CI workflow meaningful. **Not pushed** — that's left to the user, per their explicit choice.
+- [x] `git init` + initial commit — this project had no git repo before this session; one was required to make the CI workflow meaningful.
+- [x] Pushed to `https://github.com/prasadmallavalli/BMAD-YT-Tutorial` (`main`), user-created remote.
+- [x] User enabled Actions permissions for the repo (was disabled by default under `Settings → Actions → General`), then a second push (adding this summary file) triggered the first real run.
+
+## CI Result
+
+- **Workflow:** `Tests`, run on `windows-latest`, triggered by push to `main`.
+- **Conclusion:** ✅ success — restore, build, and `dotnet test OrderFlow/OrderFlow.sln` all passed.
+- **Confirmed by:** user, viewing the Actions tab directly (GitHub REST API reads from this session's environment returned stale/cached zero-run results throughout, despite real state changes on GitHub's side — not a reliable verification path here; the user's direct browser check is the source of truth for this result).
 
 ## Verification Performed (this session, macOS)
 
@@ -29,15 +38,15 @@ Both new tests follow the existing arrange/act/assert shape and mocking conventi
 - `dotnet test OrderFlow.Tests/OrderFlow.Tests.csproj` → **82/82 passed** (unaffected, unrunnable-suite change doesn't touch this project).
 - `dotnet test OrderFlow.sln` → confirms `OrderFlow.Tests` still passes 82/82 and `OrderFlow.Presentation.Tests` aborts with the expected macOS-only `Microsoft.WindowsDesktop.App` error, unchanged in nature from before this session.
 
-**Not verified:** whether the two new tests pass when actually executed — that requires Windows or the CI workflow above to run. This is explicitly disclosed, not assumed.
+**Verified as of CI run:** the two new tests, and the full `OrderFlow.Presentation.Tests` suite, executed and passed on `windows-latest`. Nothing about this suite remains unverified.
 
 ## Coverage
 
 - Presenters: 7/7 have test files (unchanged — was already complete).
-- Known coverage hole closed: 2/2 (`SaveAsync` Update-failure branch, Customer + Product detail presenters).
-- Execution gap: mitigated via CI workflow, not yet closed — closes only once the user pushes to a GitHub remote and the workflow runs green.
+- Known coverage hole closed: 2/2 (`SaveAsync` Update-failure branch, Customer + Product detail presenters) — both written and now CI-verified passing.
+- Execution gap: **closed.** CI runs and passes `OrderFlow.Presentation.Tests` on every push/PR to `main`.
 
 ## Next Steps
 
-- User pushes this repo to a GitHub remote (`git push -u origin main` after adding the remote) to activate the CI workflow and get the first real execution of `OrderFlow.Presentation.Tests`.
-- Once CI is green, the Epic 4 retro's "Growth Area" about this suite being unrunnable can be marked closed for good.
+- None required for this gap. Future pushes to `main` (or PRs against it) will re-verify `OrderFlow.Presentation.Tests` automatically.
+- The Epic 4 retro's "Growth Area" about this suite being unrunnable is closed — see `deferred-work.md` and `sprint-status.yaml` for the corresponding record updates.
