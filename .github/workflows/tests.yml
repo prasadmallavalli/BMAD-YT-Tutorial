@@ -25,3 +25,39 @@ jobs:
 
       - name: Test
         run: dotnet test OrderFlow/OrderFlow.sln --no-build -c Release
+
+      - name: Smoke test - MainForm launches without throwing (Story 1.1 AC2)
+        shell: pwsh
+        run: |
+          $exe = "OrderFlow/OrderFlow.Presentation/bin/Release/net10.0-windows/OrderFlow.Presentation.exe"
+          if (-not (Test-Path $exe)) {
+            Write-Error "Executable not found at $exe"
+            exit 1
+          }
+
+          $proc = Start-Process -FilePath $exe -PassThru
+          $expectedTitle = "OrderFlow Desktop"
+          $deadline = (Get-Date).AddSeconds(20)
+          $title = ""
+
+          while ((Get-Date) -lt $deadline) {
+            Start-Sleep -Milliseconds 500
+            $proc.Refresh()
+            if ($proc.HasExited) { break }
+            $title = $proc.MainWindowTitle
+            if ($title -eq $expectedTitle) { break }
+          }
+
+          if ($proc.HasExited) {
+            Write-Error "Process exited early (code $($proc.ExitCode)) before showing MainForm — AC2 violated."
+            exit 1
+          }
+
+          if ($title -ne $expectedTitle) {
+            Stop-Process -Id $proc.Id -Force -ErrorAction SilentlyContinue
+            Write-Error "Window title was '$title' (expected '$expectedTitle') — likely the fatal-error dialog from Program.ReportFatal instead of MainForm. AC2 violated."
+            exit 1
+          }
+
+          Write-Host "MainForm launched successfully (window title: '$title'). AC2 verified."
+          Stop-Process -Id $proc.Id -Force
