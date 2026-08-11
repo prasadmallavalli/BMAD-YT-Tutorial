@@ -8,6 +8,10 @@ walkthrough purposes.
 **Maintenance (FR-13):** this is the single file that "ships and maintains" this mapping. When
 a new interview topic is introduced, add a row here — do not create a second map elsewhere.
 
+For actual interview questions and model answers built from this mapping (including real bugs
+and decisions from this project's history), see
+[`interview-qa-guide.md`](interview-qa-guide.md).
+
 | Topic | Real App | Exhibit Pair | Architecture Reference |
 | --- | --- | --- | --- |
 | DI & Composition Root | `OrderFlow.Presentation/Program.cs` (`ConfigureServices`) | `OrderFlow.Exhibits/{Before,After}/Dip` (Story 4.3) | AD-1, AD-2, AD-5 |

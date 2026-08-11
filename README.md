@@ -13,7 +13,7 @@ Every topic that shows up in a senior WinForms interview exists in this codebase
 - **Data Access Layer** — Repository + Unit of Work over EF Core, isolating persistence from business rules.
 - **Composition root** — a single `Program.cs` wires the whole DI graph at startup; no `new` calls scattered through business/UI code.
 
-See [`OrderFlow/docs/interview-topic-map.md`](OrderFlow/docs/interview-topic-map.md) for the full topic → class/file mapping, and `OrderFlow.Exhibits/` for standalone Before/After SOLID pairs (SRP, OCP, DIP) you can run and diff independently of the full app.
+See [`OrderFlow/docs/interview-topic-map.md`](OrderFlow/docs/interview-topic-map.md) for the full topic → class/file mapping, [`OrderFlow/docs/interview-qa-guide.md`](OrderFlow/docs/interview-qa-guide.md) for a senior-team-lead Q&A guide grounded in this project's real decisions and bugs, and `OrderFlow.Exhibits/` for standalone Before/After SOLID pairs (SRP, OCP, DIP) you can run and diff independently of the full app.
 
 ## Tech stack
 
