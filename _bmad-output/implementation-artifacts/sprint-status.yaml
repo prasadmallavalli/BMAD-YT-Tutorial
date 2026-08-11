@@ -41,7 +41,7 @@
 # - Retrospective appends its action items to action_items; sprint-status surfaces open ones
 
 generated: 2026-08-06
-last_updated: 2026-08-11-epic-1-retro-done
+last_updated: 2026-08-11-epic-1-and-2-retros-done
 project: BMAD YT TUTORIAL
 project_key: NOKEY
 tracking_system: file-system
@@ -62,7 +62,7 @@ development_status:
   2-3-order-processor-factory-standard-vs-rush: done
   2-4-order-status-foundation-notification-plumbing: done
   2-5-order-creation-confirmation-ui: done
-  epic-2-retrospective: optional
+  epic-2-retrospective: done
 
   epic-3: done
   3-1-orderstatus-full-transition-table: done
@@ -110,6 +110,15 @@ action_items:
 # OrderFlow.Presentation.Tests, both executed for real, not just compiled),
 # and the MainForm launch smoke test (AC2) — all green as of run #4.
 #
-# No open action items remain. epic-1/epic-2/epic-3 retrospectives remain
-# "optional" and undone by choice — not a gap, per this file's own status
-# definitions. Implementation phase is fully closed.
+# No open action items remain. epic-1 and epic-2 retrospectives run 2026-08-11
+# (retroactively, both epics long shipped): epic-1's showed a declining
+# review-patch trend (12->10->8->4->1) and confirmed a carried-forward lesson
+# (no validate-before-fetch recurrence in epic-2's OrderStatusService);
+# epic-2's flagged that patch count is a weak severity proxy (its two most
+# serious bugs — duplicate-line-item stock bypass and decrement-time oversell,
+# both in Story 2.5 — shipped in its lowest-patch-count story). Both retros
+# raised one discussion point each; user explicitly declined a new action item
+# both times (UX debt left deferred by design; stock-decrement bugs treated as
+# closed historical findings, already regression-tested). epic-3 retrospective
+# remains "optional" and undone by choice — not a gap, per this file's own
+# status definitions. Implementation phase is fully closed.
